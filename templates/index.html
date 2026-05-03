@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost & Found</title>
+</head>
+<body>
+
+<h1>Lost & Found System</h1>
+
+<form action="/add" method="post">
+    Name: <input name="name"><br>
+    Description: <input name="desc"><br>
+    Location: <input name="loc"><br>
+
+    Type:
+    <select name="type">
+        <option>Lost</option>
+        <option>Found</option>
+    </select><br>
+
+    Person (Give To / Collect From): <input name="contact"><br>
+    Email / Details: <input name="collect"><br>
+
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+<h2>Items</h2>
+
+{% for i in range(items|length) %}
+    <p>
+    {{items[i].type}} | {{items[i].name}} | {{items[i].desc}} |
+    {{items[i].loc}} |
+
+    {% if items[i].type == "Lost" %}
+        Give To: {{items[i].contact}}
+    {% else %}
+        Collect From: {{items[i].contact}}
+    {% endif %}
+
+    | Contact: {{items[i].collect}} |
+    Status: {{items[i].status}}
+
+    <a href="/claim/{{i}}">Mark Claimed</a>
+    </p>
+{% endfor %}
+
+</body>
+</html>
